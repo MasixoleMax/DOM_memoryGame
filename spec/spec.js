@@ -1,16 +1,3 @@
-// let {
-// 	shuffleArray,
-// 	checkSrc,
-// 	cardFlip,
-// 	isinArray,
-// 	gameover,
-// 	clearInterval,
-// 	hideCard,
-// 	buildBoard,
-// 	pickCard,
-// 	buildArray,
-// 	startGame
-//   } = require('../src/script')
 describe('memory game tests',function () {
 	const jsdom = require('jsdom')
 	const {JSDOM} = jsdom;
@@ -21,15 +8,18 @@ describe('memory game tests',function () {
 	virtualConsole.sendTo(console);
 	
 	// this function simulates a click on one of the game tiles.
-	const clickSimulator = (arg)=>{
+	const startGame = (arg)=>{
 		let event = new global.view.MouseEvent('click', {
 			view: global.view,
+			bubbles: true,
+			cancelable: false
+
 		})
 
 		let element = global.window.getElementsByTagName('div')[arg]; // arg is the index of the jsdom list in li element.
 		element.dispatchEvent(event);
-    };
-    
+	};
+
     beforeEach(()=>{
 
         dom = new JSDOM(`<!DOCTYPE html>
@@ -45,7 +35,7 @@ describe('memory game tests',function () {
                 <div id="message"></div>
                 <div stlye="main"><div id="gameboard"></div></div>
               </div>
-              <script src=""></script>
+              <script src="https://raw.githubusercontent.com/MasixoleMax/DOM_memoryGame/master/src/script.js"></script>
             </body>
             </html>`, {
 				// enabling jsDom to run scripts and use external
@@ -57,19 +47,13 @@ describe('memory game tests',function () {
 
 		global.view = dom.window;
 		global.window = dom.window.document;
-		game = require("../script/src/script")
+		game = require("../src/script")
     })
     
     it("should be able to add addEventListener to all game tiles and ,make them clickable", ()=>{
 		
-		clickSimulator(0) // specify which card index to click
-		expect(global.window.getElementsByClassName('start').length).toEqual()
+		startGame(3) // specify which card index to click
+		expect(global.window.getElementsByClassName('start').length).toBe(0)
 		
-		clickSimulator(5) //flip another card at index 5
-		expect(global.window.getElementsByClassName('start').length).toEqual()
-	})
-
-	it("should dosomething", ()=>{
-		expect(typeof 1).toEqual('number')
-	})
+	 })
 })
