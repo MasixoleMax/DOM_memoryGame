@@ -8,17 +8,17 @@ describe('memory game tests',function () {
 	virtualConsole.sendTo(console);
 	
 	// this function simulates a click on one of the game tiles.
-	const startGame = (arg)=>{
-		let event = new global.view.MouseEvent('click', {
-			view: global.view,
-			bubbles: true,
-			cancelable: false
+	// const buildArray = ()=>{
+	// 	let event = new global.view.MouseEvent('click', {
+	// 		view: global.view,
+	// 		bubbles: true,
+	// 		cancelable: false
 
-		})
+	// 	})
 
-		let element = global.window.getElementsByTagName('div')[arg]; // arg is the index of the jsdom list in li element.
-		element.dispatchEvent(event);
-	};
+	// 	let element = global.window.getElementById('gameboard'); // arg is the index of the jsdom list in li element.
+	// 	element.dispatchEvent(event);
+	// };
 
     beforeEach(()=>{
 
@@ -48,12 +48,15 @@ describe('memory game tests',function () {
 		global.view = dom.window;
 		global.window = dom.window.document;
 		game = require("../src/script")
-    })
     
-    it("should be able to add addEventListener to all game tiles and ,make them clickable", ()=>{
-		
-		startGame(3) // specify which card index to click
-		expect(global.window.getElementsByClassName('start').length).toBe(0)
+    
+    it("should be able to add addEventListener to all html elements", ()=>{
+		let startGame = require("../src/script")
+
+		// 3 is the index of the div element in the html which is empty by default.
+		expect(startGame).toBeDefined();
 		
 	 })
+	})
+
 })

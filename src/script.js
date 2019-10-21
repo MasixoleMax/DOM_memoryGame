@@ -3,19 +3,19 @@ var tileArray = [];
 var tileFlippedOver = [];
 var cardFlipped = -1; 
 var timer = '';       
-//var playLockout = false;
+var playLockout = false;
 var gamePlay = false; // controls if we rebuild the board restart
 
 var startButton = global.window.getElementById('start');
-var gameBoard = document.getElementById('gameboard');
-var message = document.getElementById('message');
+var gameBoard = global.window.getElementById('gameboard');
+var message = global.window.getElementById('message');
 
 //event listeners
 startButton.addEventListener('click', startGame);
 
 function startGame() {
   cardFlipped = -1;
- //playLockout = false;
+ playLockout = false;
   startButton.style.display = 'none';
   if (!gamePlay) {
     gamePlay = true;
@@ -42,13 +42,13 @@ function buildBoard() {
 }
 
 function pickCard(tileIndex, t) {
-  if (!isinArray(t.id, tileFlippedOver)) {  // && !playLockout) {
+  if (!isinArray(t.id, tileFlippedOver)  && !playLockout) {
     if (cardFlipped >= 0) {
       cardFlip(t, tileIndex);
       playLockout = true;
       if (checkSrc(tileFlippedOver[tileFlippedOver.length - 1]) == checkSrc(tileFlippedOver[tileFlippedOver.length - 2])) {
         message.innerHTML = "Match Found.  Click more tiles";
-       // playLockout = false;
+       playLockout = false;
         cardFlipped = -1;
         if (tileFlippedOver.length == tileArray.length) {
           gameover();
@@ -72,7 +72,7 @@ function hideCard() {
     document.getElementById(vid).src = "../images/back.jpg";
   }
   clearInterval(timer);
- // playLockout = false;
+  playLockout = false;
   cardFlipped = -1;
   message.innerHTML = "Click any tile";
 }
