@@ -13,7 +13,6 @@ describe('memory game tests',function () {
 	// 		view: global.view,
 	// 		bubbles: true,
 	// 		cancelable: false
-
 	// 	})
 
 	// 	let element = global.window.getElementById('gameboard'); // arg is the index of the jsdom list in li element.
@@ -48,15 +47,21 @@ describe('memory game tests',function () {
 		global.view = dom.window;
 		global.window = dom.window.document;
 		game = require("../src/script")
-    
-    
+
+	})
     it("should be able to add addEventListener to all html elements", ()=>{
-		let startGame = require("../src/script")
+		let shuffleArray = require("../src/script")
 
 		// 3 is the index of the div element in the html which is empty by default.
-		expect(startGame).toBeDefined();
+		expect(shuffleArray).toBeDefined();
 		
 	 })
-	})
 
+	 it("should be able to add addEventListener to all html elements", ()=>{
+  		let gameover = require("../src/script")
+
+		// 3 is the index of the div element in the html which is empty by default.
+		expect(gameover).toBeDefined();
+		
+	 })
 })
